@@ -1,0 +1,7 @@
+*.obj
+*.exe
+*.lst
+*.sts
+*.crf
+*.map
+*.lib
