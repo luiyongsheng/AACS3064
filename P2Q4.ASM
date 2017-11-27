@@ -1,8 +1,8 @@
 .model small
 .stack 64
 .data
-    charA DB "d$"
-    charB DB "b$"
+    charA DB "a$"
+    charB DB "k$"
     charC DB "($"
     charD DB ")$"
 .code
@@ -38,19 +38,20 @@ main proc
     mov dl, charC
     int 21h
 
-    mov dx, charA
-    mov cx, charB
-    xchg cx, dx
+    mov bl, charA
+    xchg bl, charB
+    mov charA, bl
 
     mov ah, 02h
+    mov dl, charA 
     int 21h
 
     mov ah, 02h
     mov dl, ","
     int 21h
-    xchg cx, dx
 
     mov ah, 02h
+    mov dl, charB
     int 21h
 
     mov ah, 02h
