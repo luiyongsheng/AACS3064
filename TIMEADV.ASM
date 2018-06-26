@@ -1,24 +1,35 @@
 .MODEL SMALL
 .STACK 100H
 .DATA
-PROMPT  DB '$'     
+PROMPT  DB '===========',13,10,'$'     
 TIME DB '00:00:00$'        
 .CODE
 include 'emu8086.inc'
    MAIN PROC
-looper:
-gotoxy 0,0    
+       
      MOV AX, @DATA             
      MOV DS, AX
+looper:
+     gotoxy 0,0
      LEA BX, TIME                 
      CALL GET_TIME                
      LEA DX, PROMPT              
      MOV AH, 09H                  
-     INT 21H                      
+     INT 21H
+     gotoxy 2,1                      
      LEA DX, TIME                
      MOV AH, 09H                  
      INT 21H
-     jmp looper                      
+     
+     gotoxy 0,2                
+     LEA DX, PROMPT              
+     MOV AH, 09H                  
+     INT 21H   
+     mov ah, 01h
+     int 16h
+     jz looper
+     
+                           
      MOV AH, 4CH                  
      INT 21H
    MAIN ENDP
